@@ -10,6 +10,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { z } from "zod";
+import { useTransition } from "react";
+import { login } from "../actions";
 
 const signInSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -30,13 +32,16 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
 }
 
 export const SignInForm = () => {
+  const [isPending, startTransition] = useTransition();
   const form = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
     onSubmit: ({ value }) => {
-      console.log(value);
+      startTransition(async () => {
+        await login(value);
+      });
     },
     validators: {
       onChange: signInSchema,
@@ -61,6 +66,7 @@ export const SignInForm = () => {
               onChange={(e) => field.handleChange(e.target.value)}
               className="rounded pl-7.5"
               placeholder="example@email.com"
+              disabled={isPending}
             />
             <Image
               src={emailIcon}
@@ -82,6 +88,7 @@ export const SignInForm = () => {
               onChange={(e) => field.handleChange(e.target.value)}
               className="rounded pl-7.5"
               placeholder="Enter your password"
+              disabled={isPending}
             />
             <Image
               src={passwordIcon}
@@ -96,6 +103,7 @@ export const SignInForm = () => {
         type="submit"
         onClick={form.handleSubmit}
         className="bg-indigo w-full font-semibold"
+        disabled={isPending}
       >
         Login
       </Button>
