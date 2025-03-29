@@ -2,13 +2,32 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useForm } from "@tanstack/react-form";
+import { AnyFieldApi, useForm } from "@tanstack/react-form";
 
 import emailIcon from "@/public/assets/images/icon-email.svg";
 import passwordIcon from "@/public/assets/images/icon-password.svg";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { z } from "zod";
+
+const signInSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters long"),
+});
+
+function FieldInfo({ field }: { field: AnyFieldApi }) {
+  return (
+    <>
+      {field.state.meta.isTouched && field.state.meta.errors.length ? (
+        <em className="text-red text-xs">
+          {field.state.meta.errors.map((error) => error.message).join(", ")}
+        </em>
+      ) : null}
+      {field.state.meta.isValidating ? "Validating..." : null}
+    </>
+  );
+}
 
 export const SignInForm = () => {
   const form = useForm({
@@ -18,6 +37,9 @@ export const SignInForm = () => {
     },
     onSubmit: ({ value }) => {
       console.log(value);
+    },
+    validators: {
+      onChange: signInSchema,
     },
   });
   return (
@@ -45,6 +67,7 @@ export const SignInForm = () => {
               alt=""
               className="absolute top-7.5 left-2.5"
             />
+            <FieldInfo field={field} />
           </div>
         )}
       </form.Field>
@@ -65,10 +88,15 @@ export const SignInForm = () => {
               alt=""
               className="absolute top-7.5 left-2.5"
             />
+            <FieldInfo field={field} />
           </div>
         )}
       </form.Field>
-      <Button type="submit" className="bg-indigo w-full font-semibold">
+      <Button
+        type="submit"
+        onClick={form.handleSubmit}
+        className="bg-indigo w-full font-semibold"
+      >
         Login
       </Button>
       <p className="text-grey-dark mx-auto w-fit">
