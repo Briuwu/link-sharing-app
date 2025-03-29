@@ -3,6 +3,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-indigo: #633cff;
+  --color-lavender: #beadff;
+  --color-mauve: #efebff;
+  --color-charcoal: #333333;
+  --color-grey-dark: #737373;
+  --color-grey-light: #d9d9d9;
+  --color-off-white: #fafafa;
+  --color-white: #ffffff;
+  --color-red: #ff3939;
+
+  --font-instrument-sans: var("--font-instrument-sans");
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
