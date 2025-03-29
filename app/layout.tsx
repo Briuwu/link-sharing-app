@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { Header } from "@/components/header";
 
 const instrumentSans = localFont({
   src: "./fonts/InstrumentSans.ttf",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body
         className={`${instrumentSans.variable} font-instrument-sans bg-off-white antialiased`}
       >
+        <Header />
         {children}
       </body>
     </html>
