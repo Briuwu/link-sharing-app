@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 import logoDesktop from "@/public/assets/images/logo-devlinks-large.svg";
+import logoMobile from "@/public/assets/images/logo-devlinks-small.svg";
+
 import linkIcon from "@/public/assets/images/icon-link.svg";
 import detailIcon from "@/public/assets/images/icon-profile-details-header.svg";
 
@@ -14,9 +16,10 @@ import { cn } from "@/lib/utils";
 export const Header = () => {
   const pathname = usePathname();
   return (
-    <header className="m-6 flex items-center justify-between rounded-xl bg-white px-6 py-4">
-      <Image src={logoDesktop} alt="Logo" />
-      <ul className="flex items-center gap-4">
+    <header className="mb-0 flex items-center justify-between rounded-xl bg-white px-6 py-4 md:m-6">
+      <Image src={logoDesktop} alt="Logo" className="hidden md:block" />
+      <Image src={logoMobile} alt="Logo" className="block md:hidden" />
+      <ul className="flex items-center md:gap-4">
         <li>
           <Button
             asChild
@@ -28,7 +31,7 @@ export const Header = () => {
           >
             <Link href="/">
               <Image src={linkIcon} alt="" />
-              Links
+              <span className="hidden md:block">Links</span>
             </Link>
           </Button>
         </li>
@@ -43,7 +46,7 @@ export const Header = () => {
           >
             <Link href="/details">
               <Image src={detailIcon} alt="" />
-              Profile Details
+              <span className="hidden md:block">Profile Details</span>
             </Link>
           </Button>
         </li>
