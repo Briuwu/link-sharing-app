@@ -10,7 +10,7 @@ import codewars from "@/public/assets/images/icon-codewars.svg";
 import freecodecamp from "@/public/assets/images/icon-freecodecamp.svg";
 import gitlab from "@/public/assets/images/icon-gitlab.svg";
 import hashnode from "@/public/assets/images/icon-hashnode.svg";
-import stackoverflow from "@/public/assets/images/icon-stackoverflow.svg";
+import stackoverflow from "@/public/assets/images/icon-stack-overflow.svg";
 
 import { StaticImageData } from "next/image";
 

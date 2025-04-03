@@ -8,8 +8,8 @@ export const Container = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("rounded-xl bg-white p-6 md:p-10", className)}>
+    <section className={cn("rounded-xl bg-white p-6 md:p-10", className)}>
       {children}
-    </div>
+    </section>
   );
 };
