@@ -117,7 +117,9 @@ export const AddLinks = ({ links }: Props) => {
                           variant="ghost"
                           onClick={() => {
                             startTransition(async () => {
-                              await deleteLink(links[index].id);
+                              if (links[index]) {
+                                await deleteLink(links[index].id);
+                              }
                               field.removeValue(index);
                             });
                           }}
@@ -147,9 +149,9 @@ export const AddLinks = ({ links }: Props) => {
                                   <SelectValue placeholder="Select a platform..." />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  {SOCIALS.map(({ name, icon }) => (
+                                  {SOCIALS.map(({ name, iconSVG }) => (
                                     <SelectItem value={name} key={name}>
-                                      <Image src={icon} alt="" />
+                                      <Image src={iconSVG} alt="" />
                                       {name}
                                     </SelectItem>
                                   ))}
