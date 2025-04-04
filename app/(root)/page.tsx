@@ -1,17 +1,19 @@
 import { Container } from "@/components/container";
 import { MainLayout } from "@/components/main-layout";
 import { AddLinks } from "./add-links";
-import { Button } from "@/components/ui/button";
+import { PhonePreview } from "@/components/phone-preview";
+import { fetchLinksById } from "../actions/links";
 
-export default function Home() {
+export default async function Home() {
+  const links = await fetchLinksById();
+
   return (
     <MainLayout>
-      <Container className="hidden lg:block">test</Container>
+      <Container className="hidden lg:block">
+        <PhonePreview links={links ?? []} />
+      </Container>
       <Container className="flex flex-col justify-between">
-        <AddLinks />
-        <div className="mt-6 border-t">
-          <Button className="bg-indigo mt-4 w-full text-white">Save</Button>
-        </div>
+        <AddLinks links={links ?? []} />
       </Container>
     </MainLayout>
   );
