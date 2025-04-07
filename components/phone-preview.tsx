@@ -2,13 +2,14 @@ import Image from "next/image";
 
 import { SOCIALS } from "@/lib/constant";
 import phone from "@/public/assets/images/illustration-phone-mockup.svg";
-import { Links } from "@/lib/types";
+import { Details, Links } from "@/lib/types";
 
 type Props = {
   links: Links[];
+  details: Details;
 };
 
-export const PhonePreview = ({ links }: Props) => {
+export const PhonePreview = ({ links, details }: Props) => {
   // fetch only the socials that are in the links array
   const socials = SOCIALS.filter((social) =>
     links.some((link) => link.platform === social.name),
@@ -23,13 +24,24 @@ export const PhonePreview = ({ links }: Props) => {
   return (
     <div className="relative mx-auto w-fit">
       <Image src={phone} alt="" />
-      <div className="absolute top-16 right-5 left-5 z-10 grid px-3.5">
-        <div className="mx-auto mb-4 aspect-square w-24 rounded-full bg-black" />
-        <div className="bg-white px-4 text-center">
-          <p className="text-lg font-semibold">Brian Millonte</p>
-          <p className="text-grey-dark text-sm">millontebry@gmail.com</p>
+      <div>
+        <div className="bg-placeholder absolute top-16 right-0 left-0 mx-auto aspect-square w-24 rounded-full">
+          {details?.avatar_url && (
+            <Image
+              src={details.avatar_url!}
+              alt=""
+              fill
+              className="rounded-full object-cover"
+            />
+          )}
         </div>
-        <div className="mt-14.5 space-y-3">
+        <div className="absolute top-44 right-5 left-5 space-y-1 bg-white text-center">
+          <p className="text-lg font-semibold">
+            {details?.first_name} {details?.last_name}
+          </p>
+          <p className="text-grey-dark text-sm">{details?.email}</p>
+        </div>
+        <div className="absolute top-[280px] right-8.5 left-8.5 space-y-3.5">
           {socials.map((social) => (
             <div
               key={social.id}

@@ -1,11 +1,11 @@
+import { fetchLinks } from "@/app/actions/links";
 import { Container } from "@/components/container";
 import { MainLayout } from "@/components/main-layout";
-import { AddLinks } from "./add-links";
 import { PhonePreview } from "@/components/phone-preview";
-import { fetchLinks } from "../actions/links";
-import { fetchDetails } from "../actions/details";
+import { EditDetails } from "./edit-details";
+import { fetchDetails } from "@/app/actions/details";
 
-export default async function Home() {
+export default async function DetailsPage() {
   const links = await fetchLinks();
   const details = await fetchDetails();
 
@@ -15,7 +15,7 @@ export default async function Home() {
         <PhonePreview links={links ?? []} details={details!} />
       </Container>
       <Container className="flex flex-col justify-between">
-        <AddLinks links={links ?? []} />
+        <EditDetails />
       </Container>
     </MainLayout>
   );

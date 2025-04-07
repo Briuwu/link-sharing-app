@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 
-export const fetchLinksById = cache(async () => {
+export const fetchLinks = cache(async () => {
   const supabase = await createClient();
   const {
     data: { user },
@@ -21,6 +21,14 @@ export const fetchLinksById = cache(async () => {
     .eq("user_id", user.id);
 
   return links;
+});
+
+export const fetchLinksById = cache(async (id: string) => {
+  const supabase = await createClient();
+
+  const { data } = await supabase.from("links").select().eq("user_id", id);
+
+  return data;
 });
 
 export const insertLinks = async (data: AddLink[]) => {
