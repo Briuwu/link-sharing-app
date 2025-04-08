@@ -43,7 +43,9 @@ export const SignUpForm = () => {
       startTransition(async () => {
         try {
           await signup({ email: value.email, password: value.password });
-          toast.success("Account created successfully");
+          toast.success(
+            "Account created successfully, Please check your email to verify your account.",
+          );
           router.push("/sign-in");
         } catch (error) {
           console.error("Error signing in:", error);
