@@ -4,7 +4,7 @@ export function PhoneSkeleton() {
   return (
     <div className="relative mx-auto w-fit">
       {/* Phone frame placeholder */}
-      <div className="h-[700px] w-[300px] rounded-[36px] bg-gray-300"></div>
+      <div className="h-[700px] w-[300px] rounded-[36px] bg-neutral-100"></div>
 
       <div>
         {/* Avatar skeleton */}
@@ -21,11 +21,8 @@ export function PhoneSkeleton() {
           {[1, 2, 3].map((index) => (
             <Skeleton
               key={index}
-              className="flex items-center gap-2 rounded-md px-4 py-3 shadow"
-            >
-              <div className="h-5 w-5 rounded-sm bg-gray-200"></div>
-              <div className="h-4 w-24 rounded-sm bg-gray-200"></div>
-            </Skeleton>
+              className="flex h-[48px] items-center gap-2 rounded-md px-4 py-3 shadow"
+            ></Skeleton>
           ))}
         </div>
       </div>
