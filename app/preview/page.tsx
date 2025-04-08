@@ -30,8 +30,8 @@ export default async function PreviewPage() {
         <ShareLinkBtn
           url={
             process.env.NODE_ENV === "production"
-              ? `https://devlinks-uwu.vercel.app/preview/${details?.user_id}`
-              : `http://localhost:3000/preview/${details?.user_id}`
+              ? `https://devlinks-uwu.vercel.app/showcase/${details?.user_id}`
+              : `http://localhost:3000/showcase/${details?.user_id}`
           }
         />
       </header>

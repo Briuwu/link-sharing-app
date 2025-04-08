@@ -42,7 +42,7 @@ export const PhonePreview = ({ links, details }: Props) => {
           <p className="text-grey-dark text-sm">{details?.email}</p>
         </div>
         <div className="absolute top-[280px] right-8.5 left-8.5 space-y-3.5">
-          {socials.map((social) => (
+          {socials.slice(0, 5).map((social) => (
             <div
               key={social.id}
               className="flex items-center gap-2 rounded-md px-4 py-3 shadow"

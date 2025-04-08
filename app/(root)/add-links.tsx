@@ -41,9 +41,10 @@ const formSchema = z.object({
 
 type Props = {
   links: Links[];
+  userId: string;
 };
 
-export const AddLinks = ({ links }: Props) => {
+export const AddLinks = ({ links, userId }: Props) => {
   const defaultValues = links.map((link) => ({
     platform: link.platform,
     url: link.url,
@@ -87,7 +88,7 @@ export const AddLinks = ({ links }: Props) => {
             form.pushFieldValue("links", {
               platform: "",
               url: "",
-              id: `${links.length + 1}`,
+              id: `${userId}-${form.getFieldValue("links").length + 1}`,
             });
           }}
           variant="outline"
