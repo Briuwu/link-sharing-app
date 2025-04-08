@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
-import { LinksStoreProvider } from "@/providers/links-store-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const instrumentSans = localFont({
   src: "./fonts/InstrumentSans.ttf",
-  variable: "--font-instrument-sans",
+  variable: "--font-instrument",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +24,8 @@ export default function RootLayout({
       <body
         className={`${instrumentSans.variable} font-instrument-sans bg-off-white antialiased`}
       >
-        <LinksStoreProvider>{children}</LinksStoreProvider>
+        {children}
+        <Toaster richColors />
       </body>
     </html>
   );

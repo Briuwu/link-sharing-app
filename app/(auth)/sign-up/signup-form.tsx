@@ -1,17 +1,21 @@
 "use client";
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { z } from "zod";
+import { toast } from "sonner";
+import { useForm } from "@tanstack/react-form";
+
+import { signup } from "../actions";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AnyFieldApi, useForm } from "@tanstack/react-form";
+import { Button } from "@/components/ui/button";
 
 import emailIcon from "@/public/assets/images/icon-email.svg";
 import passwordIcon from "@/public/assets/images/icon-password.svg";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { z } from "zod";
-import { useTransition } from "react";
-import { signup } from "../actions";
+import { FieldInfo } from "@/components/field-info";
 
 const signUpSchema = z
   .object({
@@ -26,20 +30,8 @@ const signUpSchema = z
     path: ["confirmPassword"],
   });
 
-function FieldInfo({ field }: { field: AnyFieldApi }) {
-  return (
-    <>
-      {field.state.meta.isTouched && field.state.meta.errors.length ? (
-        <em className="text-red text-xs">
-          {field.state.meta.errors.map((error) => error.message).join(", ")}
-        </em>
-      ) : null}
-      {field.state.meta.isValidating ? "Validating..." : null}
-    </>
-  );
-}
-
 export const SignUpForm = () => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const form = useForm({
     defaultValues: {
@@ -49,7 +41,14 @@ export const SignUpForm = () => {
     },
     onSubmit: ({ value }) => {
       startTransition(async () => {
-        await signup({ email: value.email, password: value.password });
+        try {
+          await signup({ email: value.email, password: value.password });
+          toast.success("Account created successfully");
+          router.push("/sign-in");
+        } catch (error) {
+          console.error("Error signing in:", error);
+          toast.error(`${error}`);
+        }
       });
     },
     validators: {
@@ -136,7 +135,7 @@ export const SignUpForm = () => {
         onClick={form.handleSubmit}
         disabled={isPending}
       >
-        Login
+        Sign Up
       </Button>
       <p className="text-grey-dark mx-auto w-fit">
         Already have an account?{" "}

@@ -4,6 +4,7 @@ import { fetchDetails } from "../actions/details";
 import Image from "next/image";
 import { SOCIALS } from "@/lib/constant";
 import { ShareLinkBtn } from "../(root)/details/share-link-btn";
+import Link from "next/link";
 
 export default async function PreviewPage() {
   const links = await fetchLinks();
@@ -23,8 +24,8 @@ export default async function PreviewPage() {
     <main className="relative p-6">
       <div className="bg-indigo absolute top-0 right-0 left-0 z-0 h-[357px] w-full rounded-b-4xl"></div>
       <header className="relative z-10 flex items-center justify-between rounded-md bg-white px-6 py-4">
-        <Button className="border-indigo text-indigo" variant="outline">
-          Back to Editor
+        <Button asChild className="border-indigo text-indigo" variant="outline">
+          <Link href="/">Back to Editor</Link>
         </Button>
         <ShareLinkBtn
           url={

@@ -22,6 +22,7 @@ import { FieldInfo } from "@/components/field-info";
 import { deleteLink, insertLinks } from "../actions/links";
 import { Links } from "@/lib/types";
 import { useTransition } from "react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   links: z
@@ -32,6 +33,7 @@ const formSchema = z.object({
           .string()
           .min(1, "link is required")
           .url({ message: "must be a url" }),
+        id: z.string(),
       }),
     )
     .min(1, "at least one link is required"),
@@ -45,11 +47,14 @@ export const AddLinks = ({ links }: Props) => {
   const defaultValues = links.map((link) => ({
     platform: link.platform,
     url: link.url,
+    id: link.id,
   }));
   const [isPending, startTransition] = useTransition();
   const form = useForm({
     defaultValues: {
-      links: defaultValues ?? ([] as { platform: string; url: string }[]),
+      links:
+        defaultValues ??
+        ([] as { platform: string; url: string; id: string }[]),
     },
     validators: {
       onSubmit: formSchema,
@@ -58,7 +63,7 @@ export const AddLinks = ({ links }: Props) => {
       startTransition(async () => {
         try {
           await insertLinks(value.links);
-          form.reset();
+          toast.success("Links updated successfully");
         } catch (error) {
           console.error(error);
         }
@@ -82,6 +87,7 @@ export const AddLinks = ({ links }: Props) => {
             form.pushFieldValue("links", {
               platform: "",
               url: "",
+              id: `${links.length + 1}`,
             });
           }}
           variant="outline"

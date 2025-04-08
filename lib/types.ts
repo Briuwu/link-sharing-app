@@ -2,7 +2,7 @@ import { Tables } from "@/utils/supabase/database.types";
 
 export type Links = Tables<"links">;
 
-export type AddLink = Omit<Links, "id" | "created_at" | "user_id">;
+export type AddLink = Omit<Links, "created_at" | "user_id">;
 
 export type Details = Tables<"users">;
 

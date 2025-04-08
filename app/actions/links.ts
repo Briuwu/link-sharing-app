@@ -3,7 +3,6 @@
 import { AddLink } from "@/lib/types";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { cache } from "react";
 
 export const fetchLinks = cache(async () => {
@@ -41,32 +40,22 @@ export const insertLinks = async (data: AddLink[]) => {
     throw new Error("Must be authenticated.");
   }
 
-  const alreadyExist = await supabase
-    .from("links")
-    .select("platform")
-    .eq("user_id", user.id);
-  const existingPlatforms = alreadyExist.data?.map((link) => link.platform);
-
-  const newLinks = data.filter(
-    (link) => !existingPlatforms?.includes(link.platform),
+  const { error } = await supabase.from("links").upsert(
+    data.map((link) => ({
+      ...link,
+      user_id: user.id,
+    })),
+    { onConflict: "id" },
   );
 
-  if (newLinks.length === 0) {
-    redirect("/");
-  }
-
-  const { error } = await supabase
-    .from("links")
-    .insert(newLinks.map((link) => ({ ...link, user_id: user.id })));
-
   if (error) {
-    throw new Error(error.message);
+    throw new Error("Error inserting links: " + error.message);
   }
 
   revalidatePath("/");
 };
 
-export const deleteLink = async (id: number) => {
+export const deleteLink = async (id: string) => {
   const supabase = await createClient();
   const {
     data: { user },

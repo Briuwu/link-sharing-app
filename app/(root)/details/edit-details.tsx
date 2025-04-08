@@ -11,6 +11,7 @@ import { FieldInfo } from "@/components/field-info";
 import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
 import { insertDetails } from "@/app/actions/details";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   avatar: z.instanceof(File),
@@ -38,6 +39,7 @@ export const EditDetails = () => {
           formData.append("email", value.email);
 
           await insertDetails(formData);
+          toast.success("Details updated successfully");
         } catch (error) {
           console.log(error);
         }

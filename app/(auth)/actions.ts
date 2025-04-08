@@ -1,8 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-
 import { createClient } from "@/utils/supabase/server";
 
 export async function login({
@@ -17,11 +15,10 @@ export async function login({
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    redirect("/error");
+    throw new Error("Invalid credentials");
   }
 
   revalidatePath("/");
-  redirect("/");
 }
 
 export async function signup({
@@ -39,9 +36,8 @@ export async function signup({
   });
 
   if (error) {
-    redirect("/error");
+    throw new Error("Invalid credentials");
   }
 
   revalidatePath("/");
-  redirect("/");
 }
