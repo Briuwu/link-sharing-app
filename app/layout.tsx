@@ -11,7 +11,7 @@ const instrumentSans = localFont({
 export const metadata: Metadata = {
   title: "Devlinks - A link sharing platform for developers",
   description:
-    "Devlinks is a link sharing platform for developers, allowing you to share and discover useful links. Join us today!",
+    "Devlinks is a link sharing platform for developers, allowing you to share your social links. Join us today!",
 };
 
 export default function RootLayout({
