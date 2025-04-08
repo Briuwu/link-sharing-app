@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Devlinks
 
-## Getting Started
+Devlinks is a full-stack link sharing platform for developers to showcase all their important links in one place. Create a personalized profile and share a single link that connects others to all your social media accounts and professional profiles.
 
-First, run the development server:
+![Devlinks Preview](./public/preview.jpg)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Link Management**: Create, read, update, and delete your social media links
+- **Link Reordering**: Drag and drop functionality to organize your links
+- **Profile Customization**: Update profile picture, name, and contact information
+- **Mobile Preview**: See how your profile appears on mobile devices in real-time
+- **Responsive Design**: Optimized layout for all device sizes
+- **Form Validations**: Input validation for all forms including URL pattern matching
+- **Link Sharing**: Copy your unique profile link to clipboard with one click
+- **User Authentication**: Create an account and securely log in to manage your profile
+- **Data Persistence**: All profile and link data saved to database
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Frontend: Next.js 15
+- Backend: Supabase
+- Database: PostgreSQL (Supabase)
+- Authentication: Supabase Auth
+- Styling: TailwindCSS
+- Component Library: ShadCN UI
+- Hosting: Vercel
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. Register for an account or log in
+2. Add your profile details including profile picture, name, and email
+3. Add links to your various social media profiles and websites
+4. Arrange links by dragging and dropping them in your preferred order
+5. Preview your profile in the mobile mockup
+6. Copy your unique profile URL to share with others
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Acknowledgments
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/linksharing-app-Fbt7yweGsT)
+- Author: [Brian Millonte](https://brianmillonte.vercel.app/)
